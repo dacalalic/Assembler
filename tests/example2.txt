@@ -1,0 +1,22 @@
+.section .text
+.extern read
+.extern write
+
+.global readWrite
+
+readWrite: CALL *read(%pc)
+           ADD $4, %r0
+           CALL write
+           RET
+
+.section .data
+
+d1: .word d2
+d2: .word b1
+d3: .word d3
+
+.section .bss
+    .skip 5
+b1:
+
+.end

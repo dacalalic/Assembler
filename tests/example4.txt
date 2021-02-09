@@ -1,0 +1,29 @@
+.section .text
+.extern e
+
+.global d, f
+
+.equ c, b - s3 + e
+.equ b, a + 1 + s4 
+.equ a, 5 + s2 - s1
+.equ d, 5
+.equ f, b
+
+    JMP *s1(%pc)
+s1: JMP *s2(%pc)
+s2: JMP *s1(%pc)
+    MOV $a, %r0
+    MOV $b, %r0
+    MOV $f, %r0
+    MOV $d, %r0
+    MOV $c, %r0
+    MOVb $5, %r0h
+    MOV c(%pc), %r0
+    MOV f(%pc), %r0
+
+.section .data
+    .word 3
+s3: .byte 1
+s4: .byte 2
+
+.end

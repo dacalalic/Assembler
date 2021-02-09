@@ -1,0 +1,29 @@
+.section .text
+
+.global sum
+.equ size, ve - vs
+
+sum:    MOV $size, %r1
+        MOV vs(%pc), %r2
+        MOV (%r2), %r0
+     
+loop:   SUB $1, %r1
+        CMP $0, %r1
+        JEQ fin
+        
+        ADD $2, %r2
+        ADD (%r2), %r0
+        JMP loop
+
+fin:    MOV %r0, store
+        RET
+
+.section .data
+vs: .word 1, 2, 3, 4, 5
+ve:
+
+.section .bss
+        .skip 3
+store:  .skip 2
+
+.end
